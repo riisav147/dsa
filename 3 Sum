@@ -1,0 +1,94 @@
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+Notice that the solution set must not contain duplicate triplets.
+
+ 
+
+Example 1:
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Explanation: 
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+Example 2:
+
+Input: nums = [0,1,1]
+Output: []
+Explanation: The only possible triplet does not sum up to 0.
+Example 3:
+
+Input: nums = [0,0,0]
+Output: [[0,0,0]]
+Explanation: The only possible triplet sums up to 0.
+ 
+
+Constraints:
+
+3 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+
+---------------------------------------***************---------------------------------------
+BRUTE FORCE APPROACH:
+
+//first build a hashset to store the triplet because it does not allow duplicates
+Set<List<Integer>> st = new HashSet<>();
+
+//now I have to check all possible triplets
+for(i=0 -> n){
+    for(j=i+1 -> n){
+        for(k=j+1 -> n){
+            if(arr[i] + arr[j] + arr[k] == target){
+            
+                //if it is equal to target then store this into a temporary List
+                //this syntax is going to create temp list with the three parameters that have been passed.
+                List<Integer> temp = Arrays.asList(arr[i], arr[j], arr[k]);
+
+                //temp.sort(null), passing null as the argument to the sort method indicates
+                //that the default natural ordering is ascending order should be used to sort the elements in the list.
+                //Here we are sorting to prevent storing duplicates in HashSet
+                temp.sort(null);
+                
+                st.add(temp);   
+            }
+        }
+    }
+}
+//after doing all this now copy hashset to our resultant list
+List<List<Integer>> ans = new ArrayList<>(st);
+
+
+//Time Complexity: O(N3 * log(no. of unique triplets)), where N = size of the array.
+//Reason: Here, we are mainly using 3 nested loops.
+//And inserting triplets into the set takes O(log(no. of unique triplets)) time complexity.
+//But we are not considering the time complexity of sorting as we are just sorting 3 elements every time.
+
+//Space Complexity: O(2 * no. of the unique triplets) as we are using a set data structure and a list to store the triplets.
+
+-----------------------------****************-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
