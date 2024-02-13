@@ -68,14 +68,48 @@ List<List<Integer>> ans = new ArrayList<>(st);
 //Space Complexity: O(2 * no. of the unique triplets) as we are using a set data structure and a list to store the triplets.
 
 -----------------------------****************-------------------------------------
+BETTER APPROACH:
 
+//we are going to use this approach
+A+B+C = 0;
+C = -(A+B);
 
+//create a hashset that is going to store all triplet after sorting
+Set<List<Integer>> st = new HashSet<>();
 
+for (i=0 -> n){
 
+    //here we are going to create another hashset every time as i gets increases
+    //so that once j traverse upto n this hashset get empty;
+    Set<Integer> hashset = new HashSet<>();
 
+    for(j=i+1 -> n){
+        int third = -(arr[i]+arr[j]);
 
+        if(hashset.contains(third)){
+            List<Integer> temp  = Arrays.asList(arr[i], arr[j], third);
+            temp.sort(null);
+            st.add(temp);
+        }
+        //here we are going to store elements after performing operations on j
+        hashset.add(arr[j]);
+		}
+    
+}
 
+List<List<Integer>> ans = new ArrayList<>(st);
+return ans;
 
+//Time Complexity: O(N2 * log(no. of unique triplets)), where N = size of the array.
+//Reason: Here, we are mainly using 2 nested loops.
+//And inserting triplets into the set takes O(log(no. of unique triplets)) time complexity. 
+//But we are not considering the time complexity of sorting as we are just sorting 3 elements every time.
+
+//Space Complexity: O(2 * no. of the unique triplets) + O(N) as we are using
+//a set data structure and a list to store the triplets and extra O(N) for 
+//storing the array elements in another set.
+
+---------------------------------------***********--------------------------------------------
 
 
 
