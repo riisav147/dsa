@@ -1,0 +1,67 @@
+Given two integers a and b, return the sum of the two integers without using the operators + and -.
+
+ 
+
+Example 1:
+
+Input: a = 1, b = 2
+Output: 3
+Example 2:
+
+Input: a = 2, b = 3
+Output: 5
+ 
+
+Constraints:
+
+-1000 <= a, b <= 1000
+
+----------------------------------------------------************-----------------------------------------------------------
+let we have two numbers to add a=9(1001) and b=11(1011):
+and result will be 20(10100);
+Step 1:
+  first we zor a^b:
+   1001
+(^)1011
+----------
+   0010
+----------
+
+Step 2:
+(basically here we are calculating carry here)
+here we are going to do and operation(a&b):
+   1001
+(&)1011
+----------
+   1001
+----------
+
+now we have to do left shift with 1 so that we can add carry to next digit:
+(1001)<<1;
+= 10010;
+
+now we repeat the same opertions with the bits that we get after a^b and (a&b)<<1 and where we get a&b output as 0;
+
+code:
+
+class Solution {
+    public int getSum(int a, int b) {
+        if((a&b)==0){
+            return a^b;
+        }
+
+        int firstStep = a^b;
+        int secondStep = (a&b)<<1;
+        return getSum(firstStep,secondStep);
+    }
+}
+
+
+
+
+
+
+
+
+
+
